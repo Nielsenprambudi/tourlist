@@ -1,8 +1,6 @@
 export const ADD_TOKEN = 'ADD_TOKEN';
 export const LOGIN = 'LOGIN';
-export const LOGIN_PENDING = 'LOGIN_PENDING';
-export const LOGIN_REJECTED = 'LOGIN_REJECTED';
-export const LOGIN_FULFILLED = 'LOGIN_FULFILLED';
+export const REGISTER = 'REGISTER';
 export const ADD_USERID = 'ADD_USERID';
 export const ADD_ROLE = 'ADD_ROLE';
 export const SELECT_TOKEN = 'SELECT_TOKEN';

@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {login} from './../store/actions/ConfigAction';
 import { PacmanLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const dispatch = useDispatch();
-    const {isLoadingLogin} = useSelector((state: any) => state?.config);
+    const navigate = useNavigate();
+    const {isLoadingLogin, isLogin} = useSelector((state: any) => state?.config);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -15,6 +17,12 @@ const Login = () => {
             password: password
         }))
     }
+
+    useEffect(() => {
+        if(isLogin) {
+           navigate('/') 
+        }
+    }, [isLogin])
 
     return (
         <div className="row">
@@ -48,7 +56,7 @@ const Login = () => {
                         {
                             !isLoadingLogin ?
                             <input type="submit" value="Submit" className="btn btn-primary btn-block" onClick={() => submitLogin()} /> :
-                            <PacmanLoader loading={true} color={'#007bff'} css={'margin: 0 auto; display: block'}/>
+                            <PacmanLoader size={15} loading={true} color={'#007bff'} css={'margin: 0 auto; display: block'}/>
                         }
                 </div>
             </div>

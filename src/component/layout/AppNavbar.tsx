@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import {addToken} from "./../../store/actions/ConfigAction";
-import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 
 const AppNavbar = () => {
+        
+        const {isLogin} = useSelector((state: any) => state?.config);
+
         return (
             <div className="navbar navbar-expand-md navbar-dark bg-primary mb-4">
                 <div className="container">
@@ -18,7 +20,7 @@ const AppNavbar = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarMain">
-                        {/* {isAuthenticated == false ? (
+                        {!isLogin ? (
 
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item">
@@ -34,16 +36,8 @@ const AppNavbar = () => {
                             </ul>
                             ) : null
                         }
-                        {isAuthenticated == true ? (
+                        {isLogin ? (
                             <ul className="navbar-nav ml-auto">
-                                {
-                                    this.props.role == "author" &&
-                                    <li className="nav-item">
-                                        <Link to="/article/post" className="nav-link">
-                                            <i className="fas fa-plus"></i> Create New Article
-                                        </Link>
-                                    </li>
-                                }
                                 <li className="nav-item">
                                     <Link to="/profile" className="nav-link">
                                         Profile
@@ -51,17 +45,17 @@ const AppNavbar = () => {
                                 </li>
                                 <li className="nav-item">
                                     <Link to="/articles" className="nav-link">
-                                        Articles
+                                        Tourist List
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/" className="nav-link" onClick={this.onLogoutClick}>
+                                    <Link to="/" className="nav-link">
                                         Logout
                                     </Link>
                                 </li>
                             </ul>
 
-                        ) : null} */}
+                        ) : null}
                         
                     </div>
                 </div>
