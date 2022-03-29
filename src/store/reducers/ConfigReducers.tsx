@@ -52,7 +52,7 @@ const initialState = {
     total_pages: 0
 };
 
-export default (state = initialState, action: any) => 
+const reducer = (state = initialState, action: any) => 
 {   
     switch (action.type) {
         
@@ -387,3 +387,5 @@ export default (state = initialState, action: any) =>
             return state
     }
 }
+
+export default reducer;
