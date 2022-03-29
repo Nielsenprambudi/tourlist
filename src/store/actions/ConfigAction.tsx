@@ -1,5 +1,5 @@
 import { LOGIN, REGISTER, LOGOUT, PROFILE, UPDATEPROFILE, GETTOURISTS, GETDETILTOURISTS, ADDTOURISTS, UPDATETOURISTS, 
-    DELETETOURISTS, CLEARDETILTOURISTS, CLEARADDTOURISTS, CLEARUPDATETOURISTS, CLEARDELETETOURISTS } from "./ActionsType";
+    DELETETOURISTS, CLEARDETILTOURISTS, CLEARADDTOURISTS, CLEARUPDATETOURISTS, CLEARDELETETOURISTS, CLEARLOGIN } from "./ActionsType";
 import http from "../../core/http";
 
 export const register = (reg: any) => {
@@ -92,6 +92,12 @@ export const clearUpdateTourist = () => {
 export const clearDeleteTourist = () => {
     return {
         type: CLEARDELETETOURISTS,
+    }
+}
+
+export const clearLogin = () => {
+    return {
+        type: CLEARLOGIN,
     }
 }
 

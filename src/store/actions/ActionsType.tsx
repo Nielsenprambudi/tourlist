@@ -1,4 +1,5 @@
 export const LOGIN = 'LOGIN';
+export const CLEARLOGIN = 'CLEARLOGIN';
 export const REGISTER = 'REGISTER';
 export const PROFILE = 'PROFILE';
 export const LOGOUT = 'LOGOUT';

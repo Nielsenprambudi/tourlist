@@ -28,7 +28,7 @@ const Tourist = () => {
     useEffect(() => {
         dispatch(getTourists(1));
         if(isDeleteTourist) {
-            closingModal();
+            dispatch(clearDetilTourist());
         }
     }, [dispatch, isDeleteTourist]);
 

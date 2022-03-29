@@ -1,13 +1,14 @@
 import {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {login} from './../store/actions/ConfigAction';
+import {login, clearLogin} from './../store/actions/ConfigAction';
 import { PacmanLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
+import Modal from "antd/lib/modal/Modal";
 
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {isLoadingLogin, dataUser} = useSelector((state: any) => state?.config);
+    const {isLoadingLogin, isErrorLogin, isLogin, alertMsgErrorLogin, alertMsgSuccessLogin} = useSelector((state: any) => state?.config);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -19,14 +20,29 @@ const Login = () => {
         }))
     }
 
-    useEffect(() => {
-        if(dataUser) {
-           navigate('/') 
+    const onCloseModal = () => {
+        if(isLogin) {
+            navigate('/');
+        } else {
+            dispatch(clearLogin());
         }
-    }, [dataUser])
+    }
+
+    
 
     return (
         <div className="row">
+            <Modal
+                visible={isErrorLogin || isLogin}
+                closable={false}
+                footer={[
+                    <button onClick={() => onCloseModal()} type="button" className="btn btn-default">
+                        Ok
+                    </button>
+                ]}
+            >
+                <div>{alertMsgErrorLogin || alertMsgSuccessLogin}</div>
+            </Modal>
         <div className="col-md-6 mx-auto">
             <div className="card">
                 <div className="card-body">

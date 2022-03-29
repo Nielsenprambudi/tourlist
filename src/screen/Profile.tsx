@@ -18,7 +18,7 @@ const Profile = () => {
             setEmail(profile?.email);
             setLocation(profile?.location);
         }
-    }, [dispatch, isProfile])
+    }, [dispatch, isProfile, dataUser, profile])
 
     const update = () => {
         dispatch(updateProfile(profile?.id, {

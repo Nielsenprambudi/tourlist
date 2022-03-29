@@ -1,5 +1,5 @@
 import { LOGIN, REGISTER, PROFILE, UPDATEPROFILE, GETTOURISTS, GETDETILTOURISTS,  ADDTOURISTS, UPDATETOURISTS, DELETETOURISTS, CLEARDETILTOURISTS,
-    CLEARADDTOURISTS, CLEARUPDATETOURISTS, CLEARDELETETOURISTS, LOGOUT } from "../actions/ActionsType";
+    CLEARADDTOURISTS, CLEARUPDATETOURISTS, CLEARDELETETOURISTS, LOGOUT, CLEARLOGIN } from "../actions/ActionsType";
 
 const initialState = {
     isLoadingLogin: false,
@@ -319,6 +319,15 @@ export default (state = initialState, action: any) =>
                 isErrorDetilTourist: false,
                 touristDetil: null,
                 alertMsgErrorDetilTourists: ''
+            }
+        }
+        case CLEARLOGIN: {
+            return {
+                ...state,
+                isLoadingLogin: false,
+                isErrorLogin: false,
+                isLogin: false,
+                dataUser: null
             }
         }
         case LOGOUT: {
