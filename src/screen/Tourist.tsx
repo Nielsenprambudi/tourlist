@@ -4,7 +4,6 @@ import { PacmanLoader } from "react-spinners";
 import { getTourists, getDetilTourists, addTourists, updateTourists, deleteTourists, clearDetilTourist,
     clearAddTourist, clearUpdateTourist, clearDeleteTourist } from "../store/actions/ConfigAction";
 import { Pagination, Modal } from "antd";
-import { email_regex } from "../core/constant";
 
 const Tourist = () => {
     const dispatch = useDispatch();
@@ -40,29 +39,23 @@ const Tourist = () => {
     }
 
     const updateTable = () => {
-        if(email_regex.test(touristemail) === true) {
-            setInvalid(false);
-            setErrorMsg('');
-            if(condition === "Add") {
+        if(condition === "Add") {
 
-                dispatch(addTourists({
-                    tourist_name: touristname,
-                    tourist_email: touristemail,
-                    tourist_location: touristloc
-                }))
-            } else {
-                dispatch(updateTourists({
-                    id: touristid,
-                    tourist_name: touristname,
-                    tourist_email: touristemail,
-                    tourist_location: touristloc
-                    
-                }, touristid))
-            }
+            dispatch(addTourists({
+                tourist_name: touristname,
+                tourist_email: touristemail,
+                tourist_location: touristloc
+            }))
         } else {
-            setInvalid(true);
-            setErrorMsg("Invalid Email");
+            dispatch(updateTourists({
+                id: touristid,
+                tourist_name: touristname,
+                tourist_email: touristemail,
+                tourist_location: touristloc
+                
+            }, touristid))
         }
+        
     }
 
     const editTourist = (item: any) => {

@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {register} from '../store/actions/ConfigAction';
 import { PacmanLoader } from "react-spinners";
-import { email_regex } from "../core/constant";
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -14,18 +13,11 @@ const Register = () => {
     const [invalid, setInvalid] = useState(false);
 
     const submitRegister = () => {
-        if(email_regex.test(email) === true) {
-            setInvalid(false);
-            setErrorMsg("");
-            dispatch(register({
-                name: name,
-                email: email,
-                password: password
-            }))
-        } else {
-            setInvalid(true);
-            setErrorMsg("Invalid Email")
-        }
+        dispatch(register({
+            name: name,
+            email: email,
+            password: password
+        }));
     }
 
     return (

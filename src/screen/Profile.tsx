@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import { getprofile, updateProfile } from "../store/actions/ConfigAction";
 import { PacmanLoader } from "react-spinners";
 import { useSelector, useDispatch } from "react-redux";
-import { email_regex } from "../core/constant";
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -24,19 +23,13 @@ const Profile = () => {
     }, [dispatch, isProfile])
 
     const update = () => {
-        if(email_regex.test(email) === true) {
-            setInvalid(false);
-            setErrorMsg("");
-            dispatch(updateProfile(profile?.id, {
-                id: profile?.id,
-                name: name,
-                email: email,
-                location: location
-            }))
-        } else {
-            setInvalid(true);
-            setErrorMsg("Invalid Email");
-        }
+        dispatch(updateProfile(profile?.id, {
+            id: profile?.id,
+            name: name,
+            email: email,
+            location: location
+        }))
+        
     }
     return (
         <div className="container">

@@ -7,11 +7,12 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {isLoadingLogin, isLogin} = useSelector((state: any) => state?.config);
+    const {isLoadingLogin, isLogin, dataUser} = useSelector((state: any) => state?.config);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const submitLogin = () => {
+
         dispatch(login({
             email: email,
             password: password
@@ -19,10 +20,10 @@ const Login = () => {
     }
 
     useEffect(() => {
-        if(isLogin) {
+        if(dataUser) {
            navigate('/') 
         }
-    }, [isLogin])
+    }, [dataUser])
 
     return (
         <div className="row">
