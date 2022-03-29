@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {login} from './../store/actions/ConfigAction';
 import { PacmanLoader } from "react-spinners";
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {isLoadingLogin, isLogin, dataUser} = useSelector((state: any) => state?.config);
+    const {isLoadingLogin, dataUser} = useSelector((state: any) => state?.config);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 

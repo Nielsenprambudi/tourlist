@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PacmanLoader } from "react-spinners";
 import { getTourists, getDetilTourists, addTourists, updateTourists, deleteTourists, clearDetilTourist,
@@ -15,8 +15,6 @@ const Tourist = () => {
     const [touristemail, setTouristEmail] = useState('');
     const [touristloc, setTouristLoc] = useState('');
     const [touristid, setTouristId] = useState(0);
-    const [errorMsg, setErrorMsg] = useState("");
-    const [invalid, setInvalid] = useState(false);
     const {isLoadingTourists, tourists, 
         isLoadingAddTourist, isErrorAddTourist,
         isAddTourist, alertMsgErrorAddTourist, alertMsgSuccessAddTourist,
@@ -24,7 +22,7 @@ const Tourist = () => {
         isUpdateTourist, alertMsgErrorUpdateTourist, alertMsgSuccessUpdateTourist,
         isLoadingDeleteTourist, isErrorDeleteTourist,
         isDeleteTourist, alertMsgErrorDeleteTourist, alertMsgSuccessDeleteTourist,
-        isLoadingDetilTourists, isErrorDetilTourists, touristDetil, alertMsgErrorDetilTourist,
+        isLoadingDetilTourists, touristDetil,
         page, total_pages} = useSelector((state: any) => state?.config);
     
     useEffect(() => {
@@ -146,10 +144,6 @@ const Tourist = () => {
                         required
                         value={touristemail}
                         onChange={(e) => setTouristEmail(e.target.value)} />
-                    {
-                        invalid &&
-                        <div style={{fontSize: 10, color: 'red'}}>{errorMsg}</div>
-                    }
                 </div>
                 <div className="form-group">
                     <label htmlFor="touristloc">Tourist Location</label>

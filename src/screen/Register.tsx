@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {register} from '../store/actions/ConfigAction';
 import { PacmanLoader } from "react-spinners";
@@ -9,8 +9,6 @@ const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMsg, setErrorMsg] = useState("");
-    const [invalid, setInvalid] = useState(false);
 
     const submitRegister = () => {
         dispatch(register({
@@ -25,12 +23,6 @@ const Register = () => {
                 <div className="col-md-6 mx-auto">
                     <div className="card">
                         <div className="card-body">
-                            {
-                                invalid &&
-                                <div className="alert alert-danger text-center" role="alert">
-                                    {errorMsg}
-                                </div>
-                            }
                             {isRegister ? (
                                 <div className="alert alert-success text-center" role="alert"> 
                                    {alertMsgSuccessRegister}

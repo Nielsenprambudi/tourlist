@@ -10,8 +10,6 @@ const Profile = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [location, setLocation] = useState("");
-    const [errorMsg, setErrorMsg] = useState("");
-    const [invalid, setInvalid] = useState(false);
 
     useEffect(() => {
         dispatch(getprofile(dataUser.Id));
@@ -38,12 +36,6 @@ const Profile = () => {
                 <div className="col-md-6 mx-auto">
                     <div className="card">
                         <div className="card-body">
-                            {
-                                invalid &&
-                                <div className="alert alert-danger text-center" role="alert">
-                                    {errorMsg}
-                                </div>
-                            }
                             {isUpdateProfile ? (
                                 <div className="alert alert-success text-center" role="alert"> 
                                    {alertMsgSuccessUpdateProfile}
