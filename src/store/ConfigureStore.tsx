@@ -1,11 +1,9 @@
-import { createStore, applyMiddleware, combineReducers, compose } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import ConfigReducers from "./reducers/ConfigReducers";
-import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import promiseMiddleware from 'redux-promise-middleware';
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from "redux-persist/lib/storage";
-import { configureStore } from "@reduxjs/toolkit";
 
 
 const rootReducer = combineReducers({
