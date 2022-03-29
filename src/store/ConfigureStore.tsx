@@ -3,6 +3,9 @@ import ConfigReducers from "./reducers/ConfigReducers";
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import promiseMiddleware from 'redux-promise-middleware';
+import {persistStore, persistReducer} from 'redux-persist';
+import storage from "redux-persist/lib/storage";
+import { configureStore } from "@reduxjs/toolkit";
 
 
 const rootReducer = combineReducers({
@@ -10,14 +13,19 @@ const rootReducer = combineReducers({
     // config: null
 });
 
-
-const ConfigureStore = () => {
-    const store = createStore(
-        rootReducer,
-        compose(applyMiddleware(promiseMiddleware, logger))
-    );
-    
-    return {store}
+const persistConfig = {
+    key: "tourlist",
+    storage
 }
 
-export default ConfigureStore;
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+
+export default () => {
+    const store = createStore(
+      persistedReducer,
+      applyMiddleware(promiseMiddleware, logger),
+    );
+    const persistor = persistStore(store);
+    return {store, persistor};
+  };

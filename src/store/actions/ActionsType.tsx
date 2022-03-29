@@ -1,6 +1,7 @@
 export const ADD_TOKEN = 'ADD_TOKEN';
 export const LOGIN = 'LOGIN';
 export const REGISTER = 'REGISTER';
+export const PROFILE = 'PROFILE';
 export const ADD_USERID = 'ADD_USERID';
 export const ADD_ROLE = 'ADD_ROLE';
 export const SELECT_TOKEN = 'SELECT_TOKEN';

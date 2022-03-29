@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, ADD_TOKEN, ADD_USERID, ADD_ROLE ,SELECT_TOKEN, DESELECT_TOKEN, DESELECT_USERID, DESELECT_ROLE } from "./ActionsType";
+import { LOGIN, REGISTER, PROFILE, ADD_TOKEN, ADD_USERID, ADD_ROLE ,SELECT_TOKEN, DESELECT_TOKEN, DESELECT_USERID, DESELECT_ROLE } from "./ActionsType";
 import http from "../../core/http";
 
 export const register = (reg: any) => {
@@ -12,6 +12,13 @@ export const login = (data: any) => {
     return {
         type: LOGIN,
         payload: http.post('api/authaccount/login', data) 
+    }
+}
+
+export const getprofile = (id: string) => {
+    return {
+        type: PROFILE,
+        payload: http.get(`api/users/${id}`) 
     }
 }
 

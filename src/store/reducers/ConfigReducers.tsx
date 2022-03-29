@@ -1,5 +1,5 @@
 import http from "../../core/http";
-import { LOGIN, REGISTER, ADD_TOKEN, ADD_USERID ,SELECT_TOKEN, DESELECT_TOKEN, DESELECT_USERID, DESELECT_ROLE, ADD_ROLE } from "../actions/ActionsType";
+import { LOGIN, REGISTER, PROFILE, ADD_TOKEN, ADD_USERID ,SELECT_TOKEN, DESELECT_TOKEN, DESELECT_USERID, DESELECT_ROLE, ADD_ROLE } from "../actions/ActionsType";
 
 const initialState = {
     isLoadingLogin: false,
@@ -8,10 +8,14 @@ const initialState = {
     isLoadingRegister: false,
     isErrorRegister: false,
     isRegister: false,
+    isLoadingProfile: false,
+    isErrorProfile: false,
     alertMsgErrorLogin: '',
     alertMsgSuccessLogin: '',
     alertMsgErrorRegister: '',
     alertMsgSuccessRegister: '',
+    alertMsgErrorProfile: '',
+    profile: null,
     dataUser: null,
     token: null,
     id: null,
@@ -38,6 +42,7 @@ export default (state = initialState, action: any) =>
             }
         }
         case LOGIN + "_FULFILLED": {
+            console.log("check login fulfilled", action.payload.data.data.Token)
             if(action.payload.data.data.Token) {
                 http.defaults.headers.common['Authorization'] = `Bearer ${action.payload.data.data.Token}`;
             }
@@ -74,6 +79,29 @@ export default (state = initialState, action: any) =>
                 isRegister: true,
                 alertMsgErrorRegister: '',
                 alertMsgSuccessRegister: 'Registered Successfully!'
+            }
+        }
+        case PROFILE + "_PENDING": {
+            return {
+                ...state,
+                isLoadingProfile: true
+            }
+        }
+        case PROFILE + "_REJECTED" : {
+            return {
+                ...state,
+                isLoadingProfile: false,
+                isErrorProfile: true,
+                alertMsgErrorProfile: action.payload.response.data.Message
+            }
+        }
+        case PROFILE + "_FULFILLED": {
+            return {
+                ...state,
+                isLoadingProfile: false,
+                isErrorProfile: false,
+                alertMsgErrorProfile: '',
+                profile: action.payload.data.data
             }
         }
         case ADD_TOKEN:
