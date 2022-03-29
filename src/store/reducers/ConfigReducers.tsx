@@ -123,7 +123,6 @@ export default (state = initialState, action: any) =>
             }
         }
         case PROFILE + "_FULFILLED": {
-            console.log("check profile", action.payload)
             return {
                 ...state,
                 isLoadingProfile: false,
