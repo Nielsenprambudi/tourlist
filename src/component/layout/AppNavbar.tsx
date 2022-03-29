@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../store/actions/ConfigAction';
 
 
 const AppNavbar = () => {
-        
+        const dispatch = useDispatch();
         const {isLogin} = useSelector((state: any) => state?.config);
 
         return (
@@ -44,12 +45,12 @@ const AppNavbar = () => {
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/articles" className="nav-link">
+                                    <Link to="/tourist" className="nav-link">
                                         Tourist List
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/" className="nav-link">
+                                    <Link to="/" onClick={() => dispatch(logout())} className="nav-link">
                                         Logout
                                     </Link>
                                 </li>

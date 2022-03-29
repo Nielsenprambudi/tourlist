@@ -1,4 +1,5 @@
-import { LOGIN, REGISTER, PROFILE, ADD_TOKEN, ADD_USERID ,SELECT_TOKEN, DESELECT_TOKEN, DESELECT_USERID, DESELECT_ROLE, ADD_ROLE, UPDATEPROFILE } from "../actions/ActionsType";
+import { LOGIN, REGISTER, PROFILE, UPDATEPROFILE, GETTOURISTS, GETDETILTOURISTS,  ADDTOURISTS, UPDATETOURISTS, DELETETOURISTS, CLEARDETILTOURISTS,
+    CLEARADDTOURISTS, CLEARUPDATETOURISTS, CLEARDELETETOURISTS, LOGOUT } from "../actions/ActionsType";
 
 const initialState = {
     isLoadingLogin: false,
@@ -13,6 +14,19 @@ const initialState = {
     isLoadingProfile: false,
     isErrorProfile: false,
     isProfile: false,
+    isLoadingTourists: false,
+    isErrorTourists: false,
+    isLoadingDetilTourists: false,
+    isErrorDetilTourists: false,
+    isLoadingAddTourist: false,
+    isErrorAddTourist: false,
+    isAddTourist: false,
+    isLoadingUpdateTourist: false,
+    isErrorUpdateTourist: false,
+    isUpdateTourist: false,
+    isLoadingDeleteTourist: false,
+    isErrorDeleteTourist: false,
+    isDeleteTourist: false,
     alertMsgErrorLogin: '',
     alertMsgSuccessLogin: '',
     alertMsgErrorRegister: '',
@@ -20,11 +34,22 @@ const initialState = {
     alertMsgErrorUpdateProfile: '',
     alertMsgSuccessUpdateProfile: '',
     alertMsgErrorProfile: '',
+    alertMsgErrorTourists: '',
+    alertMsgErrorDetilTourists: '',
+    alertMsgErrorAddTourist: '',
+    alertMsgSuccessAddTourist: '',
+    alertMsgErrorUpdateTourist: '',
+    alertMsgSuccessUpdateTourist: '',
+    alertMsgErrorDeleteTourist: '',
+    alertMsgSuccessDeleteTourist: '',
     profile: null,
     dataUser: null,
-    token: null,
-    id: null,
-    role: null
+    tourists: [],
+    touristDetil: null,
+    page: 1,
+    per_page: 10,
+    totalrecord: 0,
+    total_pages: 0
 };
 
 export default (state = initialState, action: any) => 
@@ -133,38 +158,223 @@ export default (state = initialState, action: any) =>
                 alertMsgSuccessUpdateProfile: 'Update Profile Successfully!',
             }
         }
-        case ADD_TOKEN:
+        case GETTOURISTS + "_PENDING": {
             return {
                 ...state,
-                token: action.token
+                isLoadingTourists: true
             }
-        case ADD_USERID:
+        }
+        case GETTOURISTS + "_REJECTED" : {
             return {
                 ...state,
-                id: action.id
+                isLoadingTourists: false,
+                isErrorTourists: true,
+                alertMsgErrorTourists: action.payload.response.data.Message
             }
-        case ADD_ROLE:
+        }
+        case GETTOURISTS + "_FULFILLED": {
             return {
                 ...state,
-                role: action.role
+                isLoadingTourists: false,
+                isErrorTourists: false,
+                alertMsgErrorTourists: '',
+                tourists: action.payload.data.data,
+                page: action.payload.data.page,
+                per_page: action.payload.data.per_page,
+                totalrecord: action.payload.data.totalrecord,
+                total_pages: action.payload.data.total_pages
             }
-        case SELECT_TOKEN:
-            return { state }
-        case DESELECT_TOKEN:
+        }
+        case GETDETILTOURISTS + "_PENDING": {
             return {
                 ...state,
-                token: null
+                isLoadingDetilTourists: true
             }
-        case DESELECT_USERID:
+        }
+        case GETDETILTOURISTS + "_REJECTED" : {
             return {
                 ...state,
-                id: null
+                isLoadingDetilTourists: false,
+                isErrorDetilTourists: true,
+                alertMsgErrorDetilTourists: action.payload.response.data.Message
             }
-        case DESELECT_ROLE:
+        }
+        case GETDETILTOURISTS + "_FULFILLED": {
             return {
                 ...state,
-                role: null
+                isLoadingDetilTourists: false,
+                isErrorDetilTourists: false,
+                alertMsgErrorDetilTourists: '',
+                touristDetil: action.payload.data
             }
+        }
+        case ADDTOURISTS + "_PENDING": {
+            return {
+                ...state,
+                isLoadingAddTourist: true
+            }
+        }
+        case ADDTOURISTS + "_REJECTED" : {
+            return {
+                ...state,
+                isLoadingAddTourist: false,
+                isErrorAddTourist: true,
+                isAddTourist: false,
+                alertMsgErrorAddTourist: action.payload.response.data.Message
+            }
+        }
+        case ADDTOURISTS + "_FULFILLED": {
+            return {
+                ...state,
+                isLoadingAddTourist: false,
+                isErrorAddTourist: false,
+                isAddTourist: true,
+                alertMsgErrorAddTourist: '',
+                alertMsgSuccessAddTourist: 'Add Tourist Successfully!',
+            }
+        }
+        case UPDATETOURISTS + "_PENDING": {
+            return {
+                ...state,
+                isLoadingUpdateTourist: true
+            }
+        }
+        case UPDATETOURISTS + "_REJECTED" : {
+            return {
+                ...state,
+                isLoadingUpdateTourist: false,
+                isErrorUpdateTourist: true,
+                isUpdateTourist: false,
+                alertMsgErrorUpdateTourist: action.payload.response.data.Message
+            }
+        }
+        case UPDATETOURISTS + "_FULFILLED": {
+            return {
+                ...state,
+                isLoadingUpdateTourist: false,
+                isErrorUpdateTourist: false,
+                isUpdateTourist: true,
+                alertMsgErrorUpdateTourist: '',
+                alertMsgSuccessUpdateTourist: 'Update Tourist Successfully!',
+            }
+        }
+        case DELETETOURISTS + "_PENDING": {
+            return {
+                ...state,
+                isLoadingDeleteTourist: true
+            }
+        }
+        case DELETETOURISTS + "_REJECTED" : {
+            return {
+                ...state,
+                isLoadingDeleteTourist: false,
+                isErrorDeleteTourist: true,
+                isDeleteTourist: false,
+                alertMsgErrorDeleteTourist: action.payload.response.data.Message
+            }
+        }
+        case DELETETOURISTS + "_FULFILLED": {
+            return {
+                ...state,
+                isLoadingDeleteTourist: false,
+                isErrorDeleteTourist: false,
+                isDeleteTourist: true,
+                alertMsgErrorDeleteTourist: '',
+                alertMsgSuccessDeleteTourist: 'Delete Tourist Successfully!',
+            }
+        }
+        case CLEARADDTOURISTS: {
+            return {
+                ...state,
+                isLoadingAddTourist: false,
+                isErrorAddTourist: false,
+                isAddTourist: false,
+                alertMsgErrorAddTourist: '',
+                alertMsgSuccessAddTourist: '',
+            }
+        }
+        case CLEARUPDATETOURISTS: {
+            return {
+                ...state,
+                isLoadingUpdateTourist: false,
+                isErrorUpdateTourist: false,
+                isUpdateTourist: false,
+                alertMsgErrorUpdateTourist: '',
+                alertMsgSuccessUpdateTourist: '',
+            }
+        }
+        case CLEARDELETETOURISTS: {
+            return {
+                ...state,
+                isLoadingDeleteTourist: false,
+                isErrorDeleteTourist: false,
+                isDeleteTourist: false,
+                alertMsgErrorDeleteTourist: '',
+                alertMsgSuccessDeleteTourist: '',
+            }
+        }
+        case CLEARDETILTOURISTS: {
+            return {
+                ...state,
+                isLoadingDetilTourists: false,
+                isErrorDetilTourist: false,
+                touristDetil: null,
+                alertMsgErrorDetilTourists: ''
+            }
+        }
+        case LOGOUT: {
+            return {
+                ...state,
+                isLoadingLogin: false,
+                isErrorLogin: false,
+                isLogin: false,
+                isLoadingRegister: false,
+                isErrorRegister: false,
+                isRegister: false,
+                isLoadingUpdateProfile: false,
+                isErrorUpdateProfile: false,
+                isUpdateProfile: false,
+                isLoadingProfile: false,
+                isErrorProfile: false,
+                isProfile: false,
+                isLoadingTourists: false,
+                isErrorTourists: false,
+                isLoadingDetilTourists: false,
+                isErrorDetilTourists: false,
+                isLoadingAddTourist: false,
+                isErrorAddTourist: false,
+                isAddTourist: false,
+                isLoadingUpdateTourist: false,
+                isErrorUpdateTourist: false,
+                isUpdateTourist: false,
+                isLoadingDeleteTourist: false,
+                isErrorDeleteTourist: false,
+                isDeleteTourist: false,
+                alertMsgErrorLogin: '',
+                alertMsgSuccessLogin: '',
+                alertMsgErrorRegister: '',
+                alertMsgSuccessRegister: '',
+                alertMsgErrorUpdateProfile: '',
+                alertMsgSuccessUpdateProfile: '',
+                alertMsgErrorProfile: '',
+                alertMsgErrorTourists: '',
+                alertMsgErrorDetilTourists: '',
+                alertMsgErrorAddTourist: '',
+                alertMsgSuccessAddTourist: '',
+                alertMsgErrorUpdateTourist: '',
+                alertMsgSuccessUpdateTourist: '',
+                alertMsgErrorDeleteTourist: '',
+                alertMsgSuccessDeleteTourist: '',
+                profile: null,
+                dataUser: null,
+                tourists: [],
+                touristDetil: null,
+                page: 1,
+                per_page: 10,
+                totalrecord: 0,
+                total_pages: 0
+            }
+        }
         default:
             return state
     }

@@ -1,4 +1,5 @@
-import { LOGIN, REGISTER, PROFILE, UPDATEPROFILE, ADD_TOKEN, ADD_USERID, ADD_ROLE ,SELECT_TOKEN, DESELECT_TOKEN, DESELECT_USERID, DESELECT_ROLE } from "./ActionsType";
+import { LOGIN, REGISTER, LOGOUT, PROFILE, UPDATEPROFILE, GETTOURISTS, GETDETILTOURISTS, ADDTOURISTS, UPDATETOURISTS, 
+    DELETETOURISTS, CLEARDETILTOURISTS, CLEARADDTOURISTS, CLEARUPDATETOURISTS, CLEARDELETETOURISTS } from "./ActionsType";
 import http from "../../core/http";
 
 export const register = (reg: any) => {
@@ -12,6 +13,12 @@ export const login = (data: any) => {
     return {
         type: LOGIN,
         payload: http.post('api/authaccount/login', data) 
+    }
+}
+
+export const logout = () => {
+    return {
+        type: LOGOUT 
     }
 }
 
@@ -29,53 +36,69 @@ export const updateProfile = (id: string, data: any) => {
     }
 }
 
-
-
-
-export const addToken = (token: string) => {
+export const getTourists = (page: number) => {
     return {
-        type: ADD_TOKEN,
-        token: token
-    };
-}
-
-export const addUserId = (id: string) => {
-    return {
-        type: ADD_USERID,
-        id: id
-    };
-}
-
-export const addRole = (role: string) => {
-    return {
-        type: ADD_ROLE,
-        role: role
-    };
-}
-
-export const selectToken = () => {
-    return {
-        type: SELECT_TOKEN
+        type: GETTOURISTS,
+        payload: http.get(`api/Tourist?page=${page}`) 
     }
 }
 
-export const deselectToken = () => {
+export const getDetilTourists = (id: number) => {
     return {
-        type: DESELECT_TOKEN
+        type: GETDETILTOURISTS,
+        payload: http.get(`api/Tourist/${id}`) 
     }
 }
 
-export const deselectUserId = () => {
+export const addTourists = (data: any) => {
     return {
-        type: DESELECT_USERID
+        type: ADDTOURISTS,
+        payload: http.post(`api/Tourist`, data) 
     }
 }
 
-export const deselectRole = () => {
+export const updateTourists = (data: any, id: number) => {
     return {
-        type: DESELECT_ROLE
+        type: UPDATETOURISTS,
+        payload: http.put(`api/Tourist/${id}`, data) 
     }
 }
+
+export const deleteTourists = (id: number) => {
+    return {
+        type: DELETETOURISTS,
+        payload: http.delete(`api/Tourist/${id}`) 
+    }
+}
+
+export const clearDetilTourist = () => {
+    return {
+        type: CLEARDETILTOURISTS,
+    }
+}
+
+export const clearAddTourist = () => {
+    return {
+        type: CLEARADDTOURISTS,
+    }
+}
+
+export const clearUpdateTourist = () => {
+    return {
+        type: CLEARUPDATETOURISTS,
+    }
+}
+
+export const clearDeleteTourist = () => {
+    return {
+        type: CLEARDELETETOURISTS,
+    }
+}
+
+
+
+
+
 
 
 

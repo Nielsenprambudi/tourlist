@@ -6,9 +6,11 @@ import Home from './screen/Home';
 import Login from './screen/Login';
 import Register from './screen/Register';
 import Profile from './screen/Profile';
+import Tourist from './screen/Tourist';
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "./store/ConfigureStore";
+import 'antd/dist/antd.css';
 import './App.css';
 import http from './core/http';
 
@@ -41,6 +43,11 @@ function App() {
               <Route path='/profile' element={
                 <RequireAuth>
                   <Profile/>
+                </RequireAuth>
+              }/>
+              <Route path='/tourist' element={
+                <RequireAuth>
+                  <Tourist/>
                 </RequireAuth>
               }/>
             </Routes>
