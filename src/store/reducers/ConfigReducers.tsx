@@ -1,5 +1,4 @@
-import http from "../../core/http";
-import { LOGIN, REGISTER, PROFILE, ADD_TOKEN, ADD_USERID ,SELECT_TOKEN, DESELECT_TOKEN, DESELECT_USERID, DESELECT_ROLE, ADD_ROLE } from "../actions/ActionsType";
+import { LOGIN, REGISTER, PROFILE, ADD_TOKEN, ADD_USERID ,SELECT_TOKEN, DESELECT_TOKEN, DESELECT_USERID, DESELECT_ROLE, ADD_ROLE, UPDATEPROFILE } from "../actions/ActionsType";
 
 const initialState = {
     isLoadingLogin: false,
@@ -8,12 +7,18 @@ const initialState = {
     isLoadingRegister: false,
     isErrorRegister: false,
     isRegister: false,
+    isLoadingUpdateProfile: false,
+    isErrorUpdateProfile: false,
+    isUpdateProfile: false,
     isLoadingProfile: false,
     isErrorProfile: false,
+    isProfile: false,
     alertMsgErrorLogin: '',
     alertMsgSuccessLogin: '',
     alertMsgErrorRegister: '',
     alertMsgSuccessRegister: '',
+    alertMsgErrorUpdateProfile: '',
+    alertMsgSuccessUpdateProfile: '',
     alertMsgErrorProfile: '',
     profile: null,
     dataUser: null,
@@ -42,10 +47,6 @@ export default (state = initialState, action: any) =>
             }
         }
         case LOGIN + "_FULFILLED": {
-            console.log("check login fulfilled", action.payload.data.data.Token)
-            if(action.payload.data.data.Token) {
-                http.defaults.headers.common['Authorization'] = `Bearer ${action.payload.data.data.Token}`;
-            }
             return {
                 ...state,
                 isLoadingLogin: false,
@@ -92,16 +93,44 @@ export default (state = initialState, action: any) =>
                 ...state,
                 isLoadingProfile: false,
                 isErrorProfile: true,
+                isProfile: false,
                 alertMsgErrorProfile: action.payload.response.data.Message
             }
         }
         case PROFILE + "_FULFILLED": {
+            console.log("check profile", action.payload)
             return {
                 ...state,
                 isLoadingProfile: false,
                 isErrorProfile: false,
+                isProfile: true,
                 alertMsgErrorProfile: '',
-                profile: action.payload.data.data
+                profile: action.payload.data
+            }
+        }
+        case UPDATEPROFILE + "_PENDING": {
+            return {
+                ...state,
+                isLoadingUpdateProfile: true
+            }
+        }
+        case UPDATEPROFILE + "_REJECTED" : {
+            return {
+                ...state,
+                isLoadingUpdateProfile: false,
+                isErrorUpdateProfile: true,
+                isUpdateProfile: false,
+                alertMsgErrorUpdateProfile: action.payload.response.data.Message
+            }
+        }
+        case UPDATEPROFILE + "_FULFILLED": {
+            return {
+                ...state,
+                isLoadingUpdateProfile: false,
+                isErrorUpdateProfile: false,
+                isUpdateProfile: true,
+                alertMsgErrorUpdateProfile: '',
+                alertMsgSuccessUpdateProfile: 'Update Profile Successfully!',
             }
         }
         case ADD_TOKEN:

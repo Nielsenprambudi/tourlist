@@ -13,7 +13,7 @@ import './App.css';
 import http from './core/http';
 
 function RequireAuth({ children }: { children: JSX.Element }) {
-  const {isLogin, dataUser} = useSelector((state: any) => state?.config);
+  const {dataUser} = useSelector((state: any) => state?.config);
   http.defaults.headers.common['Authorization'] = `Bearer ${dataUser.Token}`;
   let location = useLocation();
 

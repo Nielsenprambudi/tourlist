@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, PROFILE, ADD_TOKEN, ADD_USERID, ADD_ROLE ,SELECT_TOKEN, DESELECT_TOKEN, DESELECT_USERID, DESELECT_ROLE } from "./ActionsType";
+import { LOGIN, REGISTER, PROFILE, UPDATEPROFILE, ADD_TOKEN, ADD_USERID, ADD_ROLE ,SELECT_TOKEN, DESELECT_TOKEN, DESELECT_USERID, DESELECT_ROLE } from "./ActionsType";
 import http from "../../core/http";
 
 export const register = (reg: any) => {
@@ -19,6 +19,13 @@ export const getprofile = (id: string) => {
     return {
         type: PROFILE,
         payload: http.get(`api/users/${id}`) 
+    }
+}
+
+export const updateProfile = (id: string, data: any) => {
+    return {
+        type: UPDATEPROFILE,
+        payload: http.put(`api/users/${id}`, data) 
     }
 }
 
