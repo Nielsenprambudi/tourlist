@@ -10,7 +10,7 @@ import Tourist from './screen/Tourist';
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "./store/ConfigureStore";
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import './App.css';
 import http from './core/http';
 
