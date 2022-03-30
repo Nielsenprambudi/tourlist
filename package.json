@@ -1,6 +1,9 @@
 {
   "name": "tourlist",
   "version": "0.1.0",
+  "engines": {
+    "node": "12.11.11"
+  },
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
