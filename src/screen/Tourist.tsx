@@ -219,16 +219,19 @@ const Tourist = () => {
                         <tbody>
                             {
                                 tourists.map((item: any, i: number) => (
-                                    <tr style={{cursor: 'pointer'}} onClick={() => detilTourist(item)} key={i}>
-                                        <td>{item.tourist_name}</td>
-                                        <td>{item.tourist_email}</td>
-                                        <td>{item.tourist_location}</td>
+                                    <tr style={{cursor: 'pointer'}} key={i}>
+                                        <td onClick={() => detilTourist(item)} >{item.tourist_name}</td>
+                                        <td onClick={() => detilTourist(item)} >{item.tourist_email}</td>
+                                        <td onClick={() => detilTourist(item)} >{item.tourist_location}</td>
                                         <td>
                                             <div className="row">
-                                                <div data-toggle="tooltip" data-placement="top" title="Edit Data" className="col-md-6 col-sm-6 col-lg-6">
+                                                <div data-toggle="tooltip" data-placement="top" title="Detil Data" className="col-md-4 col-sm-4 col-lg-4">
+                                                    <i onClick={() => detilTourist(item)}  style={{cursor: 'pointer'}} className="fas fa-list"></i>
+                                                </div>
+                                                <div data-toggle="tooltip" data-placement="top" title="Edit Data" className="col-md-4 col-sm-4 col-lg-4">
                                                     <i onClick={() => editTourist(item)}  style={{cursor: 'pointer'}} className="fas fa-pen"></i>
                                                 </div>
-                                                <div data-toggle="tooltip" data-placement="top" title="Delete Data" className="col-md-6 col-sm-6 col-lg-6">
+                                                <div data-toggle="tooltip" data-placement="top" title="Delete Data" className="col-md-4 col-sm-4 col-lg-4">
                                                     <i onClick={() => deleteTour(item)} style={{cursor: 'pointer'}} className="fas fa-trash"></i>
                                                 </div>
                                             </div>

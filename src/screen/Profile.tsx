@@ -12,8 +12,10 @@ const Profile = () => {
     const [location, setLocation] = useState("");
 
     useEffect(() => {
-        dispatch(getprofile(dataUser.Id));
-        if(isProfile) {
+        if(isProfile === false) {
+            dispatch(getprofile(dataUser.Id));
+        }
+        if(isProfile === true) {
             setName(profile?.name);
             setEmail(profile?.email);
             setLocation(profile?.location);
@@ -49,7 +51,7 @@ const Profile = () => {
                             <h1 className="text-center pb-4 pt-3">
                                 <div className="text-primary">Update Profile</div>
                             </h1>
-                            <img src={profile?.profilepicture} className="img-thumbnail" alt="tourlist"/>
+                            <img src={profile?.avatar} className="img-thumbnail" alt="tourlist"/>
                             
                                 <div className="form-group">
                                     <label htmlFor="email">Email</label>
